@@ -1,3 +1,110 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
-  <circle cx="100" cy="100" r="80" fill="#4a90e2"/>
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://w3.org" viewBox="0 0 760 900" width="100%" height="100%">
+  <style>
+    .grid-line { stroke: #e0e0e0; stroke-width: 1; stroke-dasharray: 4,4; }
+    .title { font-family: 'Courier New', Courier, monospace; font-weight: bold; font-size: 18px; fill: #1b5e20; }
+    .node-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 12px; fill: #000000; }
+    .node-bold { font-weight: bold; }
+    .edge-text { font-family: 'Courier New', Courier, monospace; font-size: 11px; fill: #37474f; font-weight: bold; }
+    .arrow { fill: #37474f; }
+  </style>
+
+  <line x1="40" y1="0" x2="40" y2="900" class="grid-line" />
+  <line x1="380" y1="0" x2="380" y2="900" class="grid-line" />
+  <line x1="720" y1="0" x2="720" y2="900" class="grid-line" />
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" class="arrow" />
+    </marker>
+  </defs>
+
+  <text x="50" y="40" class="title">АРХИТЕКТУРНАЯ СХЕМА ЯДРА QNX INT32 [СЛОТКОМПОЗИТОР GEN. III]</text>
+  <line x1="50" y1="50" x2="710" y2="50" stroke="#1b5e20" stroke-width="2" />
+
+  <rect x="180" y="80" width="400" height="50" rx="6" fill="#ffebee" stroke="#c62828" stroke-width="2" />
+  <text x="380" y="100" text-anchor="middle" class="node-text node-bold">🏄 Физическое событие ввода в TTY conhost</text>
+  <text x="380" y="118" text-anchor="middle" class="node-text">(Поток байт падает в буфер прерываний ядра)</text>
+
+  <path d="M 380 130 L 380 154" stroke="#37474f" stroke-width="2" marker-end="url(#arrow)" />
+
+  <rect x="180" y="160" width="400" height="60" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" />
+  <text x="380" y="180" text-anchor="middle" class="node-text node-bold">src/core/qnx/slot_driver/kbd_receiver.js</text>
+  <text x="380" y="196" text-anchor="middle" class="node-text">Low-Level Посимвольный Приемник Прерываний STDIN</text>
+  <text x="380" y="210" text-anchor="middle" class="node-text" fill="#2e7d32">Контракт: 0% GC | Мономорфные фазы сбора</text>
+
+  <path d="M 380 220 L 380 240 L 190 240 L 190 264" stroke="#37474f" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  <path d="M 380 220 L 380 240 L 570 240 L 570 264" stroke="#37474f" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  <text x="110" y="252" class="edge-text">Префикс ESC [ &lt;</text>
+  <text x="580" y="252" class="edge-text">ALT + [0-9]</text>
+
+  <rect x="40" y="270" width="300" height="50" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" />
+  <text x="190" y="290" text-anchor="middle" class="node-text node-bold">mouse_sgr_parser.js</text>
+  <text x="190" y="308" text-anchor="middle" class="node-text">Декодирование пакета мыши в 0-based сетку</text>
+
+  <rect x="420" y="270" width="300" height="50" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" />
+  <text x="570" y="290" text-anchor="middle" class="node-text node-bold">key_dispatcher.js</text>
+  <text x="570" y="308" text-anchor="middle" class="node-text">Прямое вычисление целевого targetSlotId</text>
+
+  <path d="M 190 320 L 190 344" stroke="#37474f" stroke-width="2" marker-end="url(#arrow)" />
+
+  <rect x="40" y="350" width="300" height="65" rx="4" fill="#ede7f6" stroke="#6a1b9a" stroke-width="2" />
+  <text x="190" y="370" text-anchor="middle" class="node-text node-bold">mouse_reducer.js</text>
+  <text x="190" y="386" text-anchor="middle" class="node-text node-bold" fill="#6a1b9a">🛡️ ГВАРД ИЗОЛЯЦИИ СТАЛЬНОЙ РАМЫ</text>
+  <text x="190" y="402" text-anchor="middle" class="node-text">Клик на кант (y === sY) -> Блокировка контента</text>
+
+  <path d="M 190 415 L 190 440 L 380 440 L 380 464" stroke="#37474f" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  <path d="M 570 320 L 570 440 L 380 440 L 380 464" stroke="#37474f" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  <text x="210" y="434" class="edge-text">msg_send_qnx(STACK_SET + SYS_RENDER)</text>
+
+  <rect x="180" y="470" width="400" height="50" rx="4" fill="#fff3e0" stroke="#ef6c00" stroke-width="2" />
+  <text x="380" y="490" text-anchor="middle" class="node-text node-bold">🔲 КОЛЬЦЕВОЙ FIFO-БУФЕР ШИНЫ ПРЕРЫВАНИЙ ЯДРА</text>
+  <text x="380" y="508" text-anchor="middle" class="node-text" fill="#ef6c00">Ёмкость: 512 слотов | Чистый Int32Array циклический стек</text>
+
+  <path d="M 380 520 L 380 544" stroke="#37474f" stroke-width="2" marker-end="url(#arrow)" />
+  <text x="390" y="536" class="edge-text">executeKernelReactiveTick()</text>
+
+  <rect x="180" y="550" width="400" height="50" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" />
+  <text x="380" y="570" text-anchor="middle" class="node-text node-bold">src/core/qnx/ipc_bus.js</text>
+  <text x="380" y="588" text-anchor="middle" class="node-text">Верховный канонический арбитр синхронизации тактов</text>
+
+  <path d="M 180 575 L 120 575 L 120 624" stroke="#37474f" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  <path d="M 580 575 L 640 575 L 640 624" stroke="#37474f" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  <text x="45" y="614" class="edge-text">Сигнал ix.STACK_SET</text>
+  <text x="645" y="614" class="edge-text">Сигнал ix.SYS_RENDER</text>
+
+  <rect x="20" y="630" width="240" height="60" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" />
+  <text x="140" y="650" text-anchor="middle" class="node-text node-bold">bus/hardware_bus.js (Такт 1)</text>
+  <text x="140" y="666" text-anchor="middle" class="node-text">Рокировка фокуса в ОЗУ:</text>
+  <text x="140" y="680" text-anchor="middle" class="node-text" fill="#2e7d32">CORE_ACTIVE_FOCUS_ID = slotId</text>
+
+  <polygon points="640,630 730,660 640,690 550,660" fill="#fff9c4" stroke="#fbc02d" stroke-width="2" />
+  <text x="640" y="658" text-anchor="middle" class="node-text node-bold">Маска готова?</text>
+  <text x="640" y="670" text-anchor="middle" class="node-text">== 0x1F?</text>
+
+  <path d="M 550 660 L 490 660 L 490 714" stroke="#37474f" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  <path d="M 640 690 L 640 714" stroke="#37474f" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+  <text x="500" y="654" class="edge-text">НЕТ (Тест / Без контроллеров)</text>
+  <text x="645" y="704" class="edge-text">ДА</text>
+
+  <rect x="340" y="720" width="260" height="65" rx="4" fill="#ffebee" stroke="#c62828" stroke-width="2" />
+  <text x="470" y="740" text-anchor="middle" class="node-text node-bold" fill="#c62828">🛡️ АВАРИЙНЫЙ ШУНТ РАМОК</text>
+  <text x="470" y="756" text-anchor="middle" class="node-text">Принудительный блайтинг рамок окон</text>
+  <text x="470" y="772" text-anchor="middle" class="node-text">Палитра xterm 46 взводится мгновенно</text>
+
+  <rect x="610" y="720" width="130" height="65" rx="4" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" />
+  <text x="675" y="746" text-anchor="middle" class="node-text node-bold">Композиция</text>
+  <text x="675" y="762" text-anchor="middle" class="node-text">Налив контента</text>
+
+  <path d="M 470 785 L 470 804" stroke="#37474f" stroke-width="2" marker-end="url(#arrow)" />
+
+  <rect x="340" y="810" width="260" height="45" rx="4" fill="#ede7f6" stroke="#6a1b9a" stroke-width="2" />
+  <text x="470" y="828" text-anchor="middle" class="node-text node-bold" fill="#6a1b9a">🛡️ ЗАПИРАЮЩИЙ ЗАТВОР ШТОРМА</text>
+  <text x="470" y="844" text-anchor="middle" class="node-text">Выжигание эхо-импульсов 0x00B5 из FIFO</text>
+
+  <path d="M 470 855 L 470 875 L 340 875" stroke="#37474f" stroke-width="2" fill="none" />
+  <path d="M 675 785 L 675 875 L 340 875" stroke="#37474f" stroke-width="2" fill="none" marker-end="url(#arrow)" />
+
+  <rect x="100" y="855" width="240" height="35" rx="15" fill="#cfd8dc" stroke="#37474f" stroke-width="2" />
+  <text x="220" y="876" text-anchor="middle" class="node-text node-bold">📺 UHD VRAM холст сброшен в stdout</text>
 </svg>
